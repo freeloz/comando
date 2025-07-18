@@ -6,7 +6,7 @@ class GeminiProvider extends AIProvider {
         super(config);
         this.apiKey = config.geminiApiKey;
         this.apiBase = config.geminiApiBase || 'https://generativelanguage.googleapis.com';
-        this.model = config.geminiModel || 'gemini-2.0-flash';
+        this.model = config.geminiModel || 'gemini-2.5-flash';
     }
 
     async generateCode(prompt) {
