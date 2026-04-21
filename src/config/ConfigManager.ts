@@ -9,11 +9,11 @@ const DEFAULT_CONFIG: AppConfig = {
   providers: {
     openai: {
       apiBase: 'https://api.openai.com/v1',
-      model: 'gpt-4o-mini',
+      model: 'gpt-5.4-mini',
     },
     anthropic: {
       apiBase: 'https://api.anthropic.com',
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
     },
     deepseek: {
       apiBase: 'https://api.deepseek.com',

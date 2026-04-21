@@ -8,7 +8,7 @@ export class OpenAIProvider extends BaseAIProvider {
 
   constructor(config: ProviderConfig, promptBuilder: IPromptBuilder) {
     super(
-      { ...config, apiBase: config.apiBase || 'https://api.openai.com/v1', model: config.model || 'gpt-4o-mini' },
+      { ...config, apiBase: config.apiBase || 'https://api.openai.com/v1', model: config.model || 'gpt-5.4-mini' },
       promptBuilder,
     );
     this.client = new OpenAI({ apiKey: this.apiKey, baseURL: this.apiBase });

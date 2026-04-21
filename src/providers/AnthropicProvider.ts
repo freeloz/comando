@@ -6,7 +6,7 @@ import { ProviderConfig } from '../types';
 export class AnthropicProvider extends BaseAIProvider {
   constructor(config: ProviderConfig, promptBuilder: IPromptBuilder) {
     super(
-      { ...config, apiBase: config.apiBase || 'https://api.anthropic.com', model: config.model || 'claude-sonnet-4-20250514' },
+      { ...config, apiBase: config.apiBase || 'https://api.anthropic.com', model: config.model || 'claude-sonnet-4-6' },
       promptBuilder,
     );
   }

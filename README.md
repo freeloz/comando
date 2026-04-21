@@ -76,8 +76,8 @@ Options:
 | Provider | Default Model | Environment Variable |
 |----------|--------------|---------------------|
 | Google Gemini | gemini-2.5-flash | `GEMINI_API_KEY` |
-| OpenAI | gpt-4o-mini | `OPENAI_API_KEY` |
-| Anthropic | claude-sonnet-4-20250514 | `ANTHROPIC_API_KEY` |
+| OpenAI | gpt-5.4-mini | `OPENAI_API_KEY` |
+| Anthropic | claude-sonnet-4-6 | `ANTHROPIC_API_KEY` |
 | DeepSeek | deepseek-chat | `DEEPSEEK_API_KEY` |
 
 ## Cross-Platform
