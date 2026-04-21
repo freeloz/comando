@@ -16,7 +16,10 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "prepare": "tsup",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "release:patch": "npm version patch && git push --follow-tags",
+    "release:minor": "npm version minor && git push --follow-tags",
+    "release:major": "npm version major && git push --follow-tags"
   },
   "author": "ivanramirez-git",
   "license": "MIT",
