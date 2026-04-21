@@ -13,7 +13,7 @@ npm install -g @freeloz/comando
 Or install directly from GitHub:
 
 ```bash
-npm install -g github:ivanramirez-git/comando
+npm install -g github:freeloz/comando
 ```
 
 ## Usage
