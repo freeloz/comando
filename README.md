@@ -1,103 +1,132 @@
-# Copilot, para tu terminal
+# Comando
 
-Una herramienta CLI que genera scripts de shell a partir de una descripción en lenguaje humano.
+A CLI tool that generates shell scripts from natural language descriptions using AI.
 
-## Instalación
+Supports **macOS**, **Linux** (Ubuntu, Alpine, AWS Linux, etc.) and **Windows** (PowerShell).
 
-Puedes instalar `comando` con cloneando el repositorio y ejecutando el script de instalación:
+## Installation
 
-```
-current_dir=$(pwd)
-cd ~
-git clone https://github.com/ivanramirez-git/comando.git
-cd comando
-node install.js
-cd $current_dir
+```bash
+npm install -g @freeloz/comando
 ```
 
-Alternativamente, puedes clonar este repositorio y vincularlo localmente:
+Or install directly from GitHub:
 
-```
-git clone https://github.com/ivanramirez-git/comando.git
-cd comando
-npm link
+```bash
+npm install -g github:ivanramirez-git/comando
 ```
 
-## Uso
+## Usage
 
-`comando` puede utilizar diferentes modelos de IA para generar comandos. Por defecto, utiliza [Gemini 2.0 Flash](https://gemini.google.com/).
+`comando` can use different AI models to generate commands. By default, it uses [Gemini 2.5 Flash](https://gemini.google.com/).
 
-### Configuración
+### Configuration
 
-Puedes configurar la herramienta usando:
+Configure the tool interactively:
 
 ```bash
 comando --config
 ```
 
-Esto te permitirá seleccionar tu proveedor de IA preferido y configurar las claves API necesarias.
+This lets you select your preferred AI provider, language (English/Spanish), and configure API keys.
 
-Alternativamente, puedes configurar las claves API mediante variables de entorno:
-
-- Para OpenAI: `OPENAI_API_KEY`
-- Para Anthropic: `ANTHROPIC_API_KEY`
-- Para usar DeepSeek: `DEEPSEEK_API_KEY`
-- Para usar Gemini: `GEMINI_API_KEY`
+You can also configure API keys via environment variables:
 
 ```bash
-export OPENAI_API_KEY='sk-XXXXXXXX'
+export GEMINI_API_KEY='your-key-here'    # Google Gemini (default)
+export OPENAI_API_KEY='sk-...'           # OpenAI
+export ANTHROPIC_API_KEY='sk-ant-...'    # Anthropic Claude
+export DEEPSEEK_API_KEY='sk-...'         # DeepSeek
 ```
 
-### Comandos básicos
-
-Una vez configurado, ejecuta `comando` seguido de lo que quieras hacer:
+### Basic Commands
 
 ```bash
-comando muéstrame como crear un archivo de texto llamado "hola.txt" con el texto "Hola mundo"
+# Generate and execute a shell command
+comando "show me how to create a file called hello.txt with the text Hello world"
+
+# Use a specific AI provider
+comando --provider anthropic "list all files in this directory"
+
+# Execute without confirmation
+comando --force "show current date"
 ```
 
-Para especificar un proveedor de IA diferente para una consulta específica:
+### Help
 
-```bash
-comando --provider anthropic muéstrame todos los archivos en este directorio
 ```
-
-Para obtener una descripción completa de todas las opciones disponibles, ejecuta `comando --help`:
-
-```sh
 $ comando --help
-Genera scripts de bash desde la línea de comandos
+Usage: comando [options] [prompt...]
 
-Uso: comando [OPCIONES] <PROMPT>
+Generate shell scripts from the command line
 
-Argumentos:
-  <PROMPT>  Descripción del comando a ejecutar
+Arguments:
+  prompt                     Description of the command to execute
 
-Opciones:
-  -y, --force           Ejecutar el programa generado sin pedir confirmación
-  -p, --provider <provider>  Especificar proveedor de IA a utilizar (openai, anthropic, deepseek, gemini)
-  -c, --config          Configurar los ajustes del CLI
-  -h, --help            Mostrar información de ayuda
-  -V, --version         Mostrar información de versión
+Options:
+  -V, --version              output the version number
+  -y, --force                Execute the generated command without confirmation
+  -p, --provider <provider>  Specify AI provider (openai, anthropic, deepseek, gemini)
+  -c, --config               Configure CLI settings
+  -h, --help                 display help for command
 ```
 
-## Desarrollo
+## Supported Providers
 
-Asegúrate de tener Node.js (versión 14 o superior) instalado. Luego, puedes instalar las dependencias con `npm install` y ejecutar el proyecto en modo desarrollo con `node index.js`.
+| Provider | Default Model | Environment Variable |
+|----------|--------------|---------------------|
+| Google Gemini | gemini-2.5-flash | `GEMINI_API_KEY` |
+| OpenAI | gpt-4o-mini | `OPENAI_API_KEY` |
+| Anthropic | claude-sonnet-4-20250514 | `ANTHROPIC_API_KEY` |
+| DeepSeek | deepseek-chat | `DEEPSEEK_API_KEY` |
 
-## Estructura del Proyecto
+## Cross-Platform
 
-El proyecto utiliza una arquitectura limpia con inyección de dependencias:
+- **macOS / Linux**: Generates `bash` scripts
+- **Windows**: Generates `PowerShell` scripts
+- OS is auto-detected and included in the AI prompt for better results
+
+## Development
+
+Requires Node.js >= 18.
+
+```bash
+npm install          # Install dependencies
+npm run build        # Build with tsup
+npm run dev          # Build in watch mode
+npm test             # Run tests with Vitest
+npm run typecheck    # Type check without emitting
+```
+
+## Project Structure
 
 ```
-/src
-  /core      - Interfaces principales y lógica de negocio
-  /providers - Implementaciones de diferentes proveedores de IA
-  /config    - Gestión de configuración
-  /utils     - Utilidades y herramientas auxiliares
-  /cli       - Interfaz de línea de comandos
+src/
+├── index.ts                 # Composition Root (DI)
+├── types/index.ts           # Shared types
+├── core/
+│   ├── interfaces.ts        # Contracts (ISP)
+│   ├── BaseAIProvider.ts    # Abstract base (OCP, LSP)
+│   ├── PromptBuilder.ts     # Prompt construction (SRP)
+│   └── CodeExecutor.ts      # Code execution (SRP)
+├── cli/
+│   ├── CLI.ts               # Main orchestrator (SRP, DIP)
+│   └── commands/
+│       ├── ConfigCommand.ts
+│       └── GenerateCommand.ts
+├── config/ConfigManager.ts  # Configuration (SRP)
+├── providers/
+│   ├── ProviderFactory.ts   # Dynamic registry (OCP)
+│   ├── OpenAIProvider.ts
+│   ├── AnthropicProvider.ts
+│   ├── DeepSeekProvider.ts
+│   └── GeminiProvider.ts
+├── i18n/index.ts            # i18n (en/es)
+└── utils/
+    ├── Formatter.ts
+    └── platform.ts
 ```
 
-## Licencia
+## License
 
-Este proyecto está disponible bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para obtener más información.
+MIT — see [LICENSE](LICENSE).
