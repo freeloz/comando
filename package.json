@@ -20,6 +20,10 @@
   },
   "author": "ivanramirez-git",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeloz/comando.git"
+  },
   "publishConfig": {
     "access": "public"
   },
