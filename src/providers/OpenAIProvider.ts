@@ -25,7 +25,7 @@ export class OpenAIProvider extends BaseAIProvider {
         { role: 'system', content: this.promptBuilder.buildSystemPrompt() },
         { role: 'user', content: this.promptBuilder.buildPrompt(prompt) },
       ],
-      max_tokens: 1000,
+      max_completion_tokens: 1000,
       temperature: 0,
     });
     return completion.choices[0]?.message?.content?.trim() || '';

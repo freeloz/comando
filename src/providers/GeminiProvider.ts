@@ -19,7 +19,13 @@ export class GeminiProvider extends BaseAIProvider {
     const response = await axios.post(
       `${this.apiBase}/v1beta/models/${this.model}:generateContent`,
       {
-        contents: [{ parts: [{ text: this.promptBuilder.buildPrompt(prompt) }] }],
+        contents: [
+          { parts: [{ text: `${this.promptBuilder.buildSystemPrompt()}\n\n${this.promptBuilder.buildPrompt(prompt)}` }] }
+        ],
+        generationConfig: {
+          maxOutputTokens: 1000,
+          temperature: 0,
+        },
       },
       {
         headers: {
