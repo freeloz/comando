@@ -6,6 +6,8 @@ import { ProviderType } from '../types';
 import { ConfigCommand } from './commands/ConfigCommand';
 import { GenerateCommand } from './commands/GenerateCommand';
 
+declare const PKG_VERSION: string;
+
 export class CLI {
   private readonly configCommand: ConfigCommand;
   private readonly generateCommand: GenerateCommand;
@@ -25,7 +27,7 @@ export class CLI {
     let promptArgs: string[] = [];
 
     program
-      .version('1.0.0')
+      .version(PKG_VERSION)
       .description(this.i18n.t('cli.description'))
       .argument('[prompt...]', this.i18n.t('cli.promptArgument'))
       .option('-y, --force', this.i18n.t('cli.forceOption'))
