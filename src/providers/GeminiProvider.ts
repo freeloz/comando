@@ -6,7 +6,7 @@ import { ProviderConfig } from '../types';
 export class GeminiProvider extends BaseAIProvider {
   constructor(config: ProviderConfig, promptBuilder: IPromptBuilder) {
     super(
-      { ...config, apiBase: config.apiBase || 'https://generativelanguage.googleapis.com', model: config.model || 'gemini-2.5-flash' },
+      { ...config, apiBase: config.apiBase || 'https://generativelanguage.googleapis.com', model: config.model || 'gemini-3-flash-preview' },
       promptBuilder,
     );
   }

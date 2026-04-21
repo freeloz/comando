@@ -18,7 +18,7 @@ npm install -g github:freeloz/comando
 
 ## Usage
 
-`comando` can use different AI models to generate commands. By default, it uses [Gemini 2.5 Flash](https://gemini.google.com/).
+`comando` can use different AI models to generate commands. By default, it uses [Gemini 3 Flash](https://gemini.google.com/).
 
 ### Configuration
 
@@ -75,7 +75,7 @@ Options:
 
 | Provider | Default Model | Environment Variable |
 |----------|--------------|---------------------|
-| Google Gemini | gemini-2.5-flash | `GEMINI_API_KEY` |
+| Google Gemini | gemini-3-flash-preview | `GEMINI_API_KEY` |
 | OpenAI | gpt-5.4-mini | `OPENAI_API_KEY` |
 | Anthropic | claude-sonnet-4-6 | `ANTHROPIC_API_KEY` |
 | DeepSeek | deepseek-chat | `DEEPSEEK_API_KEY` |

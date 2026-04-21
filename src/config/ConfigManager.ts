@@ -21,7 +21,7 @@ const DEFAULT_CONFIG: AppConfig = {
     },
     gemini: {
       apiBase: 'https://generativelanguage.googleapis.com',
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
     },
   },
 };

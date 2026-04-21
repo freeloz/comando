@@ -22,7 +22,7 @@ describe('ConfigManager', () => {
     expect(config.defaultProvider).toBe('gemini');
     expect(config.providers.openai.model).toBe('gpt-5.4-mini');
     expect(config.providers.anthropic.model).toBe('claude-sonnet-4-6');
-    expect(config.providers.gemini.model).toBe('gemini-2.5-flash');
+    expect(config.providers.gemini.model).toBe('gemini-3-flash-preview');
   });
 
   it('saveConfig and loadConfig round-trip', () => {
