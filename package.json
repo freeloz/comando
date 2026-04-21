@@ -1,6 +1,6 @@
 {
   "name": "@freeloz/comando",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Generate shell scripts from the command line using AI providers",
   "main": "dist/index.js",
   "bin": {
